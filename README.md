@@ -5,7 +5,7 @@ interface Memo {
   [key: number]: number;
 }
 
-//Cache of fibonacci sequence
+//Cache
 const cacheMeOusside: Memo = {};
 
 const fib = (num: number, memo: Memo): number => {
@@ -46,3 +46,30 @@ Output:
   '9': 34,
   '10': 55 }
 ```
+
+Personally, I think this is better:
+```
+interface Memo {
+  [key: number]: number;
+}
+
+//Cache of fibonacci sequence
+const cacheMeOusside: Memo = {
+  0: 0,
+  1: 1
+};
+
+const fib = (num: number, memo: Memo): number => {
+  if (num < 0) {
+    return 0;
+  }
+  
+  if (memo[num]) {
+    return memo[num];
+  }
+
+  return fib(num - 1, memo) + fib(num - 2, memo);
+}
+```
+
+https://repl.it/@SyedShah7/CoarseUnsteadyMethod#index.ts
